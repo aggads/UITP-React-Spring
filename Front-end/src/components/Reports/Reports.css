@@ -1,0 +1,28 @@
+
+.report{
+	margin-top: 200px;
+}
+
+
+.title{
+	margin-bottom: 60px !important;
+	left: 0px !important;
+	margin-left: 0px !important;
+}
+
+.reportBtn {
+	margin-top: 50px;
+	color: white;
+
+}
+.downloadBtn{
+	font-size: 40px;
+	background-color: #73BA59;
+	border: 2px solid #73BA59;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+/* .downloadBtn:active{
+	background-color: #68BFAC;
+	border: 2px solid #68BFAC;
+} */

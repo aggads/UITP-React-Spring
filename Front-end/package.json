@@ -1,0 +1,58 @@
+{
+  "name": "front-end",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "auth0": "^2.14.0",
+    "auth0-js": "^9.9.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
+    "classnames": "^2.2.6",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.12.0",
+    "popper.js": "^1.14.6",
+    "react": "^16.8.6",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.8.6",
+    "react-mailto": "^0.4.0",
+    "react-modal": "^3.8.1",
+    "react-popper": "^1.3.2",
+    "react-protected-mailto": "^1.0.3",
+    "react-router-dom": "^4.3.1",
+    "react-script": "^2.0.5",
+    "react-scripts": "3.0.1",
+    "react-svg": "^10.0.1",
+    "react-use-form-state": "^0.4.0",
+    "reactstrap": "^7.1.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0",
+    "socket.io-client": "^2.2.0",
+    "uniqid": "^5.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-inlinesvg": "^0.8.4",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^4.29.6"
+  }
+}

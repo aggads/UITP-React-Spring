@@ -1,0 +1,24 @@
+.radioBtn {
+	background-color: #F07F31;
+	border-color: #F07F31;
+}
+
+button{
+	width: 120px !important;
+	height: 30px !important;
+}
+
+.radioBtn:hover{
+	background-color: #F07F31;
+	border-color: #F07F31;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle{
+	background-color: #68BFAC;
+	border-color: #68BFAC;
+	
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus{
+	box-shadow: 3px 3px 20px rgb(104, 191, 172, .2);
+}

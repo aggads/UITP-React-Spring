@@ -1,0 +1,41 @@
+// Import Bootstrap and its default variables
+// @import '~bootstrap/scss/bootstrap';
+
+// Your variable overrides
+// Variables
+$primary: rgb(0, 64, 71);
+$secondary: rgb(240, 127, 49);
+$success: rgb(115, 186, 89);
+$info: rgb(104, 191, 172);
+$warning: rgb(240, 127, 49);
+$danger: rgb(232, 65, 52);
+$light: rgb(232, 232, 232);
+$enable-rounded: false;
+$font-size-base: 0.9375rem;
+$font-family-base: "OpenSans", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$headings-font-weight: 300;
+$navbar-dark-hover-color: #fff;
+$navbar-light-hover-color: rgba(0,0,0,0.9);
+$alert-border-width: 0px;
+$progress-height: 8px;
+$dropdown-min-width: 220px;
+$btn-border-radius: 0px;
+$input-border-radius: 0px;
+$dropdown-border-radius: 0px;
+$nav-tabs-border-radius: 0px;
+$nav-pills-border-radius: 0px;
+$navbar-toggler-border-radius: 0px;
+$card-border-radius: 0px;
+$tooltip-border-radius: 0px;
+$popover-border-radius: 0px;
+$badge-border-radius: 0px;
+$alert-border-radius: 0px;
+$progress-border-radius: 0px;
+$list-group-border-radius: 0px;
+$thumbnail-border-radius: 10px;
+$jumbotron-padding: 2.31rem;
+$headings-color: rgb(0, 64, 71);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap';
+

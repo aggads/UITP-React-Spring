@@ -1,0 +1,64 @@
+
+.linkU {
+	display: inline-block;
+	margin-top: 8px;
+}
+.linkU:hover {
+	text-decoration: none;
+}
+
+.nav-item {
+	font-size: 20px;
+}
+a.nav-link{
+	color: #004047;
+}
+
+a.nav-link:hover{
+	color: #F07F31;
+}
+
+a.linkU{
+	color: #004047;
+}
+
+a.linkU:hover{
+	color: #F07F31;
+}
+
+
+
+
+.navbar-toggler collapsed{
+	color: black;
+}
+
+.hmenu{
+	width: 40px;
+	height: 40px;
+	margin-right: -15px;
+}
+
+@media only screen and (max-width: 600px) {
+
+	#desktop-nav-hmenu{
+		display: none;
+	}
+	.logo{
+		width: 120px !important;
+	}
+} 
+
+@media only screen and (max-width: 800px) {
+	.logo{
+		width: 15vh !important;
+	}
+} 
+@media only screen and (min-width: 800px) {
+	.logo{
+		width: 15vh !important;
+	}
+} 
+
+
+

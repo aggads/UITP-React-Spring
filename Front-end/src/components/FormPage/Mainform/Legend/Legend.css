@@ -1,0 +1,118 @@
+
+.desktop{
+	right: 200px;
+	float: right;
+	position: fixed;
+	display: initial;
+	margin-top: 300px !important;
+
+}
+.frequencyTitle{
+	font-size: 20px;
+}
+
+#menu .frequence {
+	list-style-type: none;
+/*	margin-right: 20px;
+*/	
+display: flex;
+height: 10px;
+list-style-type: none;
+margin: 10px;
+vertical-align: middle;
+}
+#puce {
+	color: orange;
+}
+.navbar-toggler{
+	display: none;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.desktop{
+		display: none;
+	}
+	.navbar-toggler{
+		display: flex;
+	}
+
+	#mobile-nav-frequency{
+		position: relative;
+
+	}
+	#mobile-menu .mobile-frequence {
+		display: flex;
+		height: 10px;
+		list-style-type: none;
+		margin: 10px;
+		vertical-align: middle;
+	}
+} 
+
+@media only screen and (max-width: 1630px) {
+	h3{
+		font-size: 30px;
+	}
+	.desktop{
+		font-size: 15px;
+		margin-left: -330px !important;
+	}
+	.frequence{
+		margin-left: -50px !important;
+	}
+} 
+
+@media only screen and (max-width: 1435px) {
+	h3{
+		font-size: 20px;
+	}
+	.desktop{
+		font-size: 12px;
+		margin-left: -330px !important;
+	}
+	.frequence{
+		margin-left: -50px !important;
+	}
+} 
+
+@media only screen and (max-width: 1351px) {
+	h3{
+		font-size: 18px;
+	}
+	.desktop{
+		font-size: 15px;
+		/* margin-left: -330px !important; */
+	}
+	.frequence{
+		margin-left: -50px !important;
+	}
+} 
+
+@media only screen and (max-width: 1151px) {
+	.desktop{
+		display: none;
+	}
+	.navbar-toggler{
+		display: flex;
+	}
+
+	#mobile-nav-frequency{
+		position: relative;
+
+	}
+	#mobile-menu .mobile-frequence {
+		display: flex;
+		height: 10px;
+		list-style-type: none;
+		margin: 10px;
+		vertical-align: middle;
+	}
+} 
+
+
+
+
+
+

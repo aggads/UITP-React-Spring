@@ -1,0 +1,25 @@
+
+.hmenu{
+	margin-right: -40px;
+}
+
+.nav-item{
+	text-align: center;
+	margin-top: -8px;
+
+}
+
+.drop-down{
+	margin-top: -10px;
+}
+
+
+i.icon, i.icons {
+	font-size: 2em;
+	margin: 0;
+}
+.ui.dropdown .menu {
+	left: -44px;
+	top: 44px;
+
+}

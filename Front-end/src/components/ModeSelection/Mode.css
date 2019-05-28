@@ -1,0 +1,38 @@
+.checked {
+    opacity: 100%;
+}
+
+.unchecked {
+    opacity: 80%;
+}
+
+@media only screen and (min-width: 425px) {
+    button{
+        width: 180px !important;
+       
+    }
+}
+
+@media only screen and (min-width: 375px) {
+    button{
+        width: 150px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    button{
+        width: 200px !important;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    button{
+        width: 250px !important;
+    }
+}
+
+
+.selection-btn{
+    width: 250px !important;
+    height: 50px !important;
+}

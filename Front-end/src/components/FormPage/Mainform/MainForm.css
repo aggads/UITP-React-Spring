@@ -1,0 +1,73 @@
+
+.submit{
+	color: white;
+	background-color: #003939 !important;
+	border-color: #003939 !important;
+	box-shadow: 3px 3px 20px rgb(104, 191, 172, .2);
+	float: right;
+	margin-bottom: 20px;
+}
+
+label{
+	margin-top: 20px;
+	font-size: 15px;
+}
+
+.navbar{
+	margin-top: 10px;
+}
+
+.submit:hover{
+	background-color: #68BFAC;
+	border-color: #68BFAC;
+	box-shadow: 3px 3px 20px rgb(104, 191, 172, .2);
+}
+
+.btn.btn-secondary{
+	background-color: #F07F31;
+	border-color: #F07F31;
+}
+
+
+.logo {
+	width: 200px;
+	height: 200px;
+	float: left;
+}
+
+/* Hide btn in print preview */ 
+@media print{
+	.submit{
+		display: none !important;
+	}
+	.back-form{
+		display: none !important;
+	}
+}
+
+
+@media only screen and (max-width: 600px) {
+
+	.categoryName {
+		display: flex;
+		height: 30px;
+		list-style-type: none;
+		margin: 17px;
+		vertical-align: middle;
+	}
+	li.active{
+		font-size: 28px !important;
+		margin-top: 30px;
+	}
+	.inactive{
+		display: none;
+	}
+	ol, ul, dl {
+		margin-top: -20px;
+		margin-bottom: 1rem;
+	}
+	.submit{
+		margin-bottom: 20px;
+	}
+} 
+

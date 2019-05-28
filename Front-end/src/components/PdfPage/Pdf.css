@@ -1,0 +1,21 @@
+.returnBtn{
+	font-size: 30px;
+	float: right;
+	display: flex;
+	border-radius: 5px;
+	color: white;
+	margin-right: 20px;
+	background-color: #68BFAC;
+
+}
+.returnBtn:hover, .returnBtn:visited, .returnBtn:link, .returnBtn:active
+.returnBtn:active{
+	
+	color: white;
+	text-decoration: none;
+}
+
+
+/* .ui.button{
+	background-color: #fff !important;
+} */
