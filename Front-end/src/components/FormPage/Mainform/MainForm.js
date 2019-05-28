@@ -83,31 +83,39 @@ export default class MainForm extends React.Component {
 
     test = (question) => {
         var test = this.state.allData
-        // console.log("RUN BABY", question)
-        //console.log(test)
-        for (let i = 0; i < test.length; i++) {
-            //console.log("RUN SECONDE TIME BABY", test[i].motivation)
-            //, test[i].motivation, test[i].comment, test[i].frequency
-            if (test[i].question === question) {
-                //console.log("HELLLOOO ", test[i].frequency)
-                //return test[i].frequency 
-                if (test[i].frequency) {
-                    console.log("frequency", test[i].frequency)
-                    return test[i].frequency
-                } else if (test[i].motivation) {
-                    console.log("motivation", test[i].motivation)
-                    return test[i].motivation
-                } else if (test[i].comment) {
-                    console.log("comment", test[i].comment)
-                    return test[i].comment
-                } else {
-                    console.log("Nothing")
+        //console.log("test value ", test)
+        if (test === null){
+            return this.setState({
+                allData: ["Hello"]
+            })
+        }else{
+            
+            for (let i = 0; i < test.length; i++) {
+
+                //console.log("RUN SECONDE TIME BABY", test[i].motivation)
+                //, test[i].motivation, test[i].comment, test[i].frequency
+                if (test[i].question === question) {
+                    //console.log("HELLLOOO ", test[i].frequency)
+                    //return test[i].frequency 
+                    if (test[i].frequency) {
+                        console.log("frequency", test[i].frequency)
+                        return test[i].frequency
+                    } else if (test[i].motivation) {
+                        console.log("motivation", test[i].motivation)
+                        return test[i].motivation
+                    } else if (test[i].comment) {
+                        console.log("comment", test[i].comment)
+                        return test[i].comment
+                    } else {
+                        console.log("Nothing")
+                    }
+    
+    
                 }
-
-
+    
             }
-
         }
+        
 
     }
 
@@ -181,6 +189,7 @@ export default class MainForm extends React.Component {
 
     render() {
         // NEXT / SUBMIT BUTTON SWITCH
+        console.log(this.state.allData)
         const nextSubmit = this.state.selectedCat === 5 ?
             // || (parseInt((localStorage.getItem("group")) === 1)
             (JSON.parse(localStorage.getItem("completedModes")).filter(item => item === false).length === 0) ?
@@ -240,9 +249,13 @@ export default class MainForm extends React.Component {
                                         bigItem.selectedMode = selectedModeName
 
                                         // console.log("big item ", getData)
+                                        // this.setState({
+                                        //     allData: []
+                                        // })
                                         var allData = this.state.allData
                                         var modified = false
-                                        //console.log(this.state.allData)
+                                        console.log("state data ", this.state.allData)
+                                        
                                         var verif = this.state.allData.find(function (data, id) {
                                             if (data.id === getData.id) {
                                                 for (var key in data) {
@@ -253,8 +266,22 @@ export default class MainForm extends React.Component {
                                                         else {
                                                             data[key] = getData[key]
                                                             modified = true
+                                                            
+                                                            // for (var i = 0; allData.length; i++){
+                                                            //     console.log("in loop", allData[i].question)
+                                                            // }
+                                                            // allData.forEach(function(item){
+                                                            //     //console.log("this ...", item.motivation)
+                                                            //     var allDataId = allData[id]
+                                                            //     //console.log("all data in for each ", allDataId)
+                                                            //     allData.splice(id, 1)
+                                                            //     //console.log("item ", item)
+                                                                
+                                                            // })
+                                                            //console.log("state data ", this.state.allData)
                                                             allData.splice(id, 1)
-                                                            console.log("all data ", allData)
+                                                        console.log("all data after for each", allData)
+                                                            //console.log("get data ", getData)
                                                         }
                                                     }
 
@@ -264,6 +291,8 @@ export default class MainForm extends React.Component {
                                                 return false
                                             }
                                         })
+
+
                                         if (!verif || modified) {
                                             allData.push(getData)
                                             localStorage.setItem("bigItem", JSON.stringify(allData))
