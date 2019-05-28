@@ -253,10 +253,18 @@ export default class MainForm extends React.Component {
                                         //     allData: []
                                         // })
                                         var allData = this.state.allData
-                                        var modified = false
-                                        console.log("state data ", this.state.allData)
+                                        var copiedState = this.state
+
+                                        //var allData = [...this.state.allData]
+                                        //copiedState = Object.values(copiedState)
+                                        copiedState = Object.values(allData)
+                                        console.log("iterable", copiedState)
+
                                         
-                                        var verif = this.state.allData.find(function (data, id) {
+                                        var modified = false
+                                        //console.log("state data ", this.state.allData)
+                                        
+                                        var verif = copiedState.find(function (data, id) {
                                             if (data.id === getData.id) {
                                                 for (var key in data) {
                                                     if (data[key] === getData[key]) {
@@ -278,9 +286,10 @@ export default class MainForm extends React.Component {
                                                             //     //console.log("item ", item)
                                                                 
                                                             // })
-                                                            //console.log("state data ", this.state.allData)
-                                                            allData.splice(id, 1)
-                                                        console.log("all data after for each", allData)
+                                                            
+                                                            const allSplicedData = copiedState.splice(id, 1)
+                                                            console.log("all spliced data", allSplicedData)
+                                                            console.log("copied state ", copiedState)
                                                             //console.log("get data ", getData)
                                                         }
                                                     }
@@ -294,8 +303,8 @@ export default class MainForm extends React.Component {
 
 
                                         if (!verif || modified) {
-                                            allData.push(getData)
-                                            localStorage.setItem("bigItem", JSON.stringify(allData))
+                                            copiedState.push(getData)
+                                            localStorage.setItem("bigItem", JSON.stringify(copiedState))
                                         }
                                     }
                                     }
