@@ -21,7 +21,7 @@ class Comments extends PureComponent {
   }
 
   render() {
-
+    
     return <FormGroup>
       <Label for="exampleText">Comment</Label>
       <Input
@@ -29,6 +29,9 @@ class Comments extends PureComponent {
         type="textarea"
         id="exampleText"
         onBlur={(event) => this.onblur(event)}
+        // onBlur={this.props.onBlur}
+        // onChange={this.props.handleChange}
+        // value={this.props.selectedCategory.comment}
         value={this.state.comment}
         name="comment"
         placeholder="First place comment if needed"

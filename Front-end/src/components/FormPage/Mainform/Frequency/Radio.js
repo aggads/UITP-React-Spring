@@ -10,7 +10,7 @@ class Frequency extends PureComponent {
 
     state = {
         regularity: [],
-        regularityId: 0,
+        regularityId: null,
         active: null,
         id: 0,
     }
@@ -23,9 +23,10 @@ class Frequency extends PureComponent {
                     isLoaded: true,
                 })
             })
-        var bigItem = JSON.parse(localStorage.getItem("bigItem"))
-        //console.log(bigItem)
+    }
 
+    frequencyForParent = () =>{
+        return null
     }
 
     funFunc = () => {
@@ -33,30 +34,27 @@ class Frequency extends PureComponent {
         this.props.callBackFromParent(regularityCall)
     }
     render() {
-
         const questionId = this.props.listNameFromParent;
-
+        // console.log(this.props.selectedCategory.frequency)
+        // console.log("question id ", questionId.frequency)
         return (
             <>
                 <ButtonGroup className='squareRadio' name="frequency">
                     {this.state.regularity.map((frequency, index) => {
                         return (
                             <Button
-                                className={this.props.value == index ? `active` : null}
+                                className={this.props.selectedCategory.frequency == index ? `active` : null}
                                 onClick={(a) => {
                                         this.setState({ active: index, regularityId: index })
                                         localStorage.setItem("frequency", a.target.value);
                                         var frequencyStorage = parseInt(localStorage.getItem("frequency"))
                                         questionId.frequency = frequencyStorage
-                                        var questionStorage = localStorage.getItem("question");
-                                        var getData = JSON.parse(localStorage.getItem(`${questionStorage}`))
-                                        getData.frequency = frequencyStorage
+                                        this.props.passValueToMainForm(questionId)
                                     }
                                 }
                                 name="frequency"
                                 key={index}
                                 value={index}
-
                             >
                                 {frequency.regularity}
                             </Button>

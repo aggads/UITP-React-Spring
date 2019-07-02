@@ -27,7 +27,18 @@ public class Result {
     @Column(name="id_question")
     private int idQuestion;
 
+
+//    @JsonManagedReference
+//    @ManyToOne
+//    @JoinColumn(name = "result")
+//    private Result result;
+
     @OneToMany(mappedBy = "result")
     @JsonIgnore
     private Set<Result> result;
+
+
+//    public void saveOrUpdateResult(Result result) {
+//        ResultRepository.save(result);
+//    }
 }

@@ -30,6 +30,7 @@ public class UitpController {
     @Autowired
     RestTemplate restTemplate;
 
+
     @CrossOrigin
     @GetMapping("/getallquestions")
     public List<Questions> getAllQuestion() {
@@ -65,6 +66,37 @@ public class UitpController {
     public List<Users> getAllUsers() {
         return usersRepository.findAll();
     }
+
+//    @CrossOrigin
+//    @PostMapping("/result")
+//    public ResponseEntity<?> addorUpdateResult(@RequestBody Result result) {
+//        result.saveOrUpdateResult(result);
+//        return new ResponseEntity("Result added successfully", HttpStatus.OK);
+//    }
+
+    @CrossOrigin
+    @PostMapping("/result")
+    Result newResult(@RequestBody Result newResult){
+        return resultRepository.save(newResult);
+    }
+
+
+//    @RequestMapping(method = RequestMethod.POST, value = "/result",
+//            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+//            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
+//    )
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public Result result(@RequestBody Map<Integer, Integer> body) {
+//        int idFrequency = body.get("idFrequency");
+//        int idMotivation = body.get("idMotivation");
+//        int idQuestion = body.get("idQuestion");
+//
+//        return idFrequency;
+//    }
+//    public void saveResult(@RequestParam int idFrequency, @RequestParam int idMotivation, @RequestParam int idQuestion) {
+//
+//    }
+
 
 //    @GetMapping("/getallmodes")
 //    public List<Modes> getAllModes() { return modesRepository.findAll();}

@@ -1,109 +1,84 @@
 import Frequency from './Frequency/Radio';
 import Comments from './Comment/Comment';
-// import Legend from './Legend/Legend';
-import Motivation from './Motivation/Motivation'
 import Categories from './Categories/Categories'
 import URLStorage from '../../../constants';
 import { Link } from 'react-router-dom';
-import uniqueid from 'uniqid';
-import { AsyncStorage } from 'AsyncStorage';
-// import  ConfirmModal  from '../Modal';
-
 import '../../../App.css';
-
 import axios from 'axios';
 import React from 'react';
+import ErrorBoundary from '../Mainform/ErrorBoundary'
 import { Container, Row, Col, Button, Form, FormGroup } from 'reactstrap';
 
 import './MainForm.css'
-import DropdownExampleCompact from './Motivation/Motivation';
-import { ButtonGroup, Dropdown } from 'semantic-ui-react';
 import DropdownMotivation from './Motivation/Motivation';
 
 export default class MainForm extends React.Component {
-constructor(props){
-    super (props)
-    this.state = {
-        question: [],
-        id: 1,
-        test: null,
-        allData: [],
-        answers: [],
-        value: [],
-        selectedCat: 1,
-        selectedMode: 0,
-        dataGet : [],
-        incidentName: "",
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            question: [],
+            id: 1,
+            allData: [],
+            answers: [],
+            result: [],
+            value: [],
+            selectedCat: 1,
+            selectedMode: 0,
+            dataGet: [],
+            incidentName: "",
+            frequencyFromChild: 0,
+            comment: "",
+            motivationFromChild: null,
+        }
+        // this.handleChange = this.handleChange.bind(this)
     }
-}
 
-    allStorage() {
-
+    getAllStorage() {
         var archive = [],
             keys = Object.keys(localStorage),
             i = 0, key;
 
         for (; key = keys[i]; i++) {
-            archive.push( key + '=' + localStorage.getItem(key));
+            archive.push(key + '=' + localStorage.getItem(key));
         }
-
         return console.log(archive);
     }
 
-    async handleClick(question){
-        if (this.state.allData.length) {  
+    async handleClick(question) {
+        if (this.state.allData.length) {
             var getQuestion = this.state.allData.find(function (data, id) {
-                    if (data.id === question.id) {
-                        return data
-                    } else {
-                        return false
-                    }
-                })
-            if(getQuestion) {
+                console.log("get question ", getQuestion)
+                if (data.id === question.id) {
+                    return data
+                } else {
+                    return false
+                }
+            })
+            if (getQuestion) {
                 var indexOf = this.state.allData.indexOf(getQuestion);
+                console.log("index of ", indexOf)
                 for (var key in getQuestion) {
                     if (getQuestion[key] === question[key] || getQuestion[key] === undefined) {
                         getQuestion[key] = question[key]
                         await this.state.allData.splice(indexOf, 1, question)
-                        // console.log(this.state.allData)
-                        localStorage.setItem("bigItem ", JSON.stringify(this.state.allData))
+                        localStorage.setItem("bigItem", JSON.stringify(this.state.allData))
                     }
                 }
-            } else {
-                await this.setState({ allData: [...this.state.allData, question ]})
-                // console.log(this.state.allData)
-                localStorage.setItem("bigItem ", JSON.stringify(this.state.allData))
+            }else {
+                await this.setState({ allData: [this.state.allData, question] })
+                localStorage.setItem("bigItem", JSON.stringify(this.state.allData))
 
             }
-        } else {
-            await this.setState({allData: [question]})
-            localStorage.setItem("bigItem ", JSON.stringify(this.state.allData))
+        }else {
+            await this.setState({ allData: [question] })
+            localStorage.setItem("bigItem", JSON.stringify(this.state.allData))
         }
-        await localStorage.setItem("bigItem ", JSON.stringify(this.state.allData))
-
-        
-        // await AsyncStorage.getItem('bigItem')
-        //     .then(value =>console.log("AsyncStorage value ", value))
-        //         // this.setState({ allData: value }))
-        //     .catch(e => console.log('err', e));
-
-        // this.setState({
-        //     allData: bigItem
-        // })
-
-        console.log("this state all data in handleClik ", this.state.allData)
-        console.log(" local storage in handleClick without parse ", localStorage.getItem("bigItem"))
-        console.log(" local storage in handleClick with parse ", JSON.parse(localStorage.getItem("bigItem")))
-
-        
-
-
+        await localStorage.setItem("bigItem", JSON.stringify(this.state.allData))
     }
 
     handleSelection = (idx) => (e) => {
-        this.setState({ selectedMode: idx });
-    };
+        this.setState({ selectedMode: idx })
+    }
 
     next = () => {
         let id = this.state.id + 1;
@@ -111,10 +86,7 @@ constructor(props){
         this.setState(prevState => ({
             selectedCat: prevState.selectedCat + 1,
             id: prevState.id + 1,
-
         }));
-
-
     }
     prev = () => {
         let id = this.state.id - 1;
@@ -123,9 +95,7 @@ constructor(props){
             selectedCat: prevState.selectedCat - 1,
             id: prevState.id - 1,
         }));
-
     }
-
 
     fetchQuestions = (id) => {
         axios.get(`${URLStorage.API_URL}/getAllQuestions/${id}`)
@@ -137,76 +107,16 @@ constructor(props){
                 })
             })
     }
-
-    test = (question) => {
-        var test = this.state.allData
-        // if (test === null) {
-        //     return this.setState({
-        //         allData: []
-        //     })
-        //} 
-        //else {
-
-        //     for (let i = 0; i < test.length; i++) {
-        //         if (test[i].question === question) {
-        //         }
-
-        //     }
-        // }
-
-
-    }
-
-
-
-    // anyChange = (id) => (e) => {
-    //     const inputName = e.target.name;
-    //     const inputValue = e.target.value;
-    //     let entries = Object.assign({}, this.state);
-    //     const { answers } = entries;
-    //     answers.map(answer => answer.questionID === id ? answer[inputName] = inputValue : undefined);
-    //     this.setState(entries);
-    //     localStorage.setItem(this.props.id, JSON.stringify(this.state.answers));
-
-    //     // ------------ SWITCH BOOLEAN TO COMPLETED FOR CURRENT MODE ---------------
-
-    //     console.log(this.state.allData)
-
-    //     if (this.state.allData.filter(answer => answer.frequency === null).length === 0) {
-
-    //         let completeMode = JSON.parse(localStorage.getItem("completedModes"));
-    //         completeMode[this.props.index] = true;
-
-    //         if (this.props.group) {
-    //             var dummieArray = [];
-    //             completeMode.map(item => dummieArray.push(true));
-    //             localStorage.setItem("completedModes", JSON.stringify(dummieArray));
-
-    //         } else {
-    //             localStorage.setItem("completedModes", JSON.stringify(completeMode));
-    //         }
-    //     }
-    // }
-
-    selectCat = (e) => {
-        this.setState({ selectedCat: e.target.value })
+    anyChange = (id) => (e) => {
+        const inputName = e.target.name;
+        const inputValue = e.target.value;
+        let entries = Object.assign({}, this.state);
+        const { answers } = entries;
+        answers.map(answer => answer.questionID === id ? answer[inputName] = inputValue : undefined);
+        this.setState(entries);
         localStorage.setItem(this.props.id, JSON.stringify(this.state.answers));
-    }
-    frequencyCallback = (regularityCall) => {
-        this.setState({
-            regularityFromChild: regularityCall
-        })
-    }
-    componentDidMount() {
 
-        var bigItem = JSON.parse(localStorage.getItem("bigItem"))
-        console.log(" local storage in did mount without parse ", localStorage.getItem("bigItem"))
-        console.log(" local storage in did mount with parse ", JSON.parse(localStorage.getItem("bigItem")))
-
-        this.fetchQuestions(1);
-
-        const transportId = this.props.id;
-        this.setState({ modeID: transportId})
+        // ------------ SWITCH BOOLEAN TO COMPLETED FOR CURRENT MODE ---------------
 
         if (this.state.allData.filter(answer => answer.frequency === null).length === 0) {
 
@@ -222,103 +132,184 @@ constructor(props){
                 localStorage.setItem("completedModes", JSON.stringify(completeMode));
             }
         }
-    };
+    }
 
-    
+    selectCat = (e) => {
+        this.setState({ selectedCat: e.target.value })
+        localStorage.setItem(this.props.id, JSON.stringify(this.state.answers));
+    }
+    frequencyCallback = (regularityCall) => {
+        this.setState({
+            regularityFromChild: regularityCall
+        })
+        //console.log("regularity call ", regularityCall)
+    }
+    componentDidMount() {
+        var bigItem = JSON.parse(localStorage.getItem("bigItem"))
+        this.fetchQuestions(1);
+        const transportId = this.props.id;
+        var selected = localStorage.getItem("selected");
+        this.setState({ modeID: transportId, selected : selected })
+        if (this.state.allData.filter(answer => answer.frequency === null).length === 0) {
+            let completeMode = JSON.parse(localStorage.getItem("completedModes"));
+            completeMode[this.props.index] = true;
+            if (this.props.group) {
+                var dummieArray = [];
+                completeMode.map(item => dummieArray.push(true));
+                localStorage.setItem("completedModes", JSON.stringify(dummieArray));
+            } else {
+                localStorage.setItem("completedModes", JSON.stringify(completeMode));
+            }
+        }
+    }
+
+    getFrequency = (frequencyCallbackFromChild) => {
+        // console.log('From getFrequency in MainForm:')
+        // console.log(frequencyCallbackFromChild)
+        this.setState({
+            frequencyFromChild: frequencyCallbackFromChild
+        })
+    }
+
+    getMotivation = (motivationCallbackFromChild) => {
+        // console.log('From getMotivation in MainForm:')
+        // console.log(motivationCallbackFromChild)
+        this.setState({
+            motivationFromChild: motivationCallbackFromChild
+        })
+    }
+    // handleOptionSelect(e){
+    //     this.setState({ selected : e.target.value });
+    //     localStorage.setItem("selected", e.target.value);
+    //   }
 
     componentWillMount(){
-        
         var bigItem = JSON.parse(localStorage.getItem("bigItem"))
         var questionStorage = localStorage.getItem("question");
         var getData = JSON.parse(localStorage.getItem(`${questionStorage}`))
-
-        console.log(" local storage in will mount without parse ", localStorage.getItem("bigItem"))
-        console.log(" local storage in will mount with parse ", JSON.parse(localStorage.getItem("bigItem")))
         var selectedMode = JSON.parse(localStorage.getItem("selectedModes"))
-            var selectedModeName = [];
-            for (var i in selectedMode) {
-                selectedModeName.push(selectedMode[i].name)
-            }
-            if(bigItem){
-                bigItem.selectedMode = selectedModeName
-            } 
-            else {
-                bigItem = []
-            }
+        var selectedModeName = [];
+        for (var i in selectedMode) {
+            selectedModeName.push(selectedMode[i].name)
+        }
+        if (bigItem) {
+            bigItem.selectedMode = selectedModeName
+        }
+        else {
+            bigItem = []
+        }
+        // if(this.state.allData.length === 0 || this.state.allData.length < 60){
+        //     this.state.allData.indexOf(questionParent) === -1 ? this.state.allData.push(questionParent) : console.log("This item already exists");
+        // }
+        // this.setState({ allData: bigItem })
 
-        this.setState({ allData : bigItem, dataGet: getData})
+        //------------------ FIX NEEDED -----------------
+        // Multiple localStorage and state update with setState: allData
+        this.setState({ 
+            allData: bigItem, 
+            dataGet: getData, 
+        })
+        
     }
+        render() {
+            // NEXT / SUBMIT BUTTON SWITCH
+            // console.log("THE STATE ", this.state.allData)
+            const nextSubmit = this.state.selectedCat === 5 ?
+                // || (parseInt((localStorage.getItem("group")) === 1)
+                (JSON.parse(localStorage.getItem("completedModes")).filter(item => item === false).length === 0) ?
+                    <Link to={{ 
+                        pathname: "/confirmation", 
+                        state: { answers: this.state.allData } }}>
+                        <Button onClick={this.submit} className="submit" >Submit</Button>
+                    </Link>
+                    : <>
+                        <Button className="submit" disabled>Submit</Button>
+                    </>
+                :
+                <Button onClick={this.next} className="submit">Next</Button>
+            return (
+                <React.Fragment>
+                    <Container>
+                        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                            {this.state.selectedCat !== 1 && <Button style={{ marginRight: "10px" }} onClick={this.prev} className="submit" >Previous</Button>}
+                            {nextSubmit}
+                        </div>
+                        <Categories idPage={this.state.id} />
+                        <br />
+                        <br />
+                        {this.state.question.map((question, index) => {
+                            // console.log("STATE ", this.state.allData);
+                            
+                            // var allData = this.state.allData
+                            var questionParent = question
+                            this.state.incidentName = questionParent.incident.name
+                            localStorage.setItem("question", question.question)
+                            var questionStorage = localStorage.getItem("question")
+                            localStorage.setItem(`${questionStorage}`, JSON.stringify(questionParent))
+                            // var result = []
+                            // for( var i = 0; i < allData.length; i++){
+                            //     result.push(allData[i])
+                            // }
+                            // for (var i = 0;i < result.length; i++){
+                            //     if(!result[i].hasOwnProperty("motivation")){
+                            //         result[i].motivation = "undefined"
+                            // }else if(!result[i].hasOwnProperty("frequency")){
+                            //     result[i].frequency = 0
+                            // }
+                            // }
+                            if(!questionParent.hasOwnProperty("motivation")){
+                                questionParent.motivation = "Undefined"
+                            }else if(!questionParent.hasOwnProperty("frequency")){
+                                questionParent.frequency = 0
+                                
+                            }
+                        if(this.state.allData.length === 0 || this.state.allData.length < 60){
+                            this.state.allData.indexOf(questionParent) === -1 ? this.state.allData.push(questionParent) : console.log("This item already exists");
+                        }
+                        var answeredQuestion = this.state.allData.find(function(answer) {
+                            return answer.id === question.id
+                        })
+                       
+                        console.log("STATE ", this.state.allData);
 
-
-    render() {
-        this.allStorage()
-        // NEXT / SUBMIT BUTTON SWITCH
-        console.log(" local storage in render without parse ", localStorage.getItem("bigItem"))
-        console.log(" local storage in render with parse ", JSON.parse(localStorage.getItem("bigItem")))
-        console.log("THE STATE ", this.state.allData)
-        const nextSubmit = this.state.selectedCat === 5 ?
-            // || (parseInt((localStorage.getItem("group")) === 1)
-            (JSON.parse(localStorage.getItem("completedModes")).filter(item => item === false).length === 0) ?
-                <Link to={{ pathname: "/confirmation", state: { answers: this.state.answers } }}>
-                    <Button onClick={this.submit} className="submit" >Submit</Button>
-                </Link>
-                : <>
-                    <Button className="submit" disabled>Submit</Button>
-                </>
-            :
-            <Button onClick={this.next} className="submit">Next</Button>;
-        return (
-            <React.Fragment>
-                <Container>
-                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        {this.state.selectedCat !== 1 && <Button style={{ marginRight: "10px" }} onClick={this.prev} className="submit" >Previous</Button>}
-                        {nextSubmit}
-                    </div>
-                    <Categories idPage={this.state.id} />
-                    <br />
-                    <br />
-                    {this.state.question.map((question, index) => {
-                        var questionParent = question
-                        this.state.incidentName = questionParent.incident.name
-                        localStorage.setItem("question", question.question)
-                        var questionStorage = localStorage.getItem("question");
-                        localStorage.setItem(`${questionStorage}`, JSON.stringify(questionParent))
-                        return (
-                            <ul
-                                key={index}
-                            >
-                                <li
-                                    value={question.question}
+                            return (
+                                <ul
                                     key={index}
-                                    style={{ fontSize: "20px" }}
-                                    onClick={this.handleClick.bind(this, question)}
                                 >
-                                    {
-                                        question.question
-                                    }
-                                    <DropdownMotivation
+                                    <li
+                                        value={question.question}
                                         key={index}
-                                        listNameFromParent={questionParent}
-                                        value={this.test(question.question)}
-                                    />
-                                    <Frequency
-                                        callBackFromParent={this.frequencyCallback}
-                                        listNameFromParent={questionParent}
-                                        value={this.test(question.question)}
-                                    />
-                                    <Comments
-                                        listNameFromParent={questionParent}
-                                        getComment={this.getBackComment}
-                                        value={this.test(question.question)}
-                                    />
-                                </li>
-                            </ul>
-                        );
-                    })}
-                </Container>
-            </React.Fragment>
-        )
+                                        style={{ fontSize: "20px" }}
+                                        onClick={this.handleClick.bind(this, question)}
+                                    >
+                                        {
+                                            question.question
+                                        }
+                                        <DropdownMotivation
+                                            listNameFromParent={questionParent}
+                                            selectedCategory = {answeredQuestion}
+                                            passValueToMainForm={this.getMotivation}
+                                            value={this.state.selected}
+                                        />
+                                        <Frequency
+                                            callBackFromParent={this.frequencyCallback}
+                                            listNameFromParent={questionParent}
+                                            selectedCategory={answeredQuestion}
+                                            passValueToMainForm={this.getFrequency}   
+                                        />
+                                        <Comments
+                                            listNameFromParent={questionParent}
+                                            getComment={this.getBackComment}
+                                            selectedCategory={answeredQuestion}
+                                            onBlur={this.onBlur}
+                                            handleChange={this.handleChange}
+                                        />
+                                    </li>
+                                </ul>
+                            )
+                        })}
+                    </Container>
+                </React.Fragment>
+            )
+        }
     }
-}
-
-
